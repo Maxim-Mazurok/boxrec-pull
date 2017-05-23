@@ -1,6 +1,13 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
+// https://stackoverflow.com/a/21984136/4536543
+function _calculateAge(birthday) {
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
 function extractInfo(data) {
     var $ = cheerio.load(data);
 
@@ -12,6 +19,7 @@ function extractInfo(data) {
             l: parseInt($('.bglostBlock').first().text()),
             d: parseInt($('.bgdrawBlock').first().text())
         },
+        rating: parseInt($('span.starRatingLarge').attr('style').split(':')[1].trim()) + '%',
         ranking: {
             world: {
                 rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[0]),
@@ -22,7 +30,9 @@ function extractInfo(data) {
                 total: parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[1]),
                 country_code: $('div.flag:not(.world)').first().attr('class').split(/\s+/)[1].toUpperCase()
             }
-        }
+        },
+        birthday: $('span[itemprop="birthDate"]').text(),
+        age: _calculateAge(Date.parse($('span[itemprop="birthDate"]').text()))
     };
 }
 
