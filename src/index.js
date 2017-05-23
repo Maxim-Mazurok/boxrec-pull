@@ -19,20 +19,20 @@ function extractInfo(data) {
             l: parseInt($('.bglostBlock').first().text()),
             d: parseInt($('.bgdrawBlock').first().text())
         },
-        rating: parseInt($('span.starRatingLarge').attr('style').split(':')[1].trim()) + '%',
+        rating: $('span.starRatingLarge').length > 0 ? parseInt($('span.starRatingLarge').attr('style').split(':')[1].trim()) + '%' : null,
         ranking: {
             world: {
-                rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[0]),
-                total: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[1])
+                rank: $('div.flag.world[title="World"] + div > a').length > 0 ? parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[0]) : null,
+                total: $('div.flag.world[title="World"] + div > a').length > 0 ? parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[1]) : null
             },
             local: {
-                rank: parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[0]),
-                total: parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[1]),
-                country_code: $('div.flag:not(.world)').first().attr('class').split(/\s+/)[1].toUpperCase()
+                rank: $('div.flag:not(.world) + div > a').length > 0 ? parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[0]) : null,
+                total: $('div.flag:not(.world) + div > a').length > 0 ? parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[1]) : null,
+                country_code: $('div.flag:not(.world) + div > a').length > 0 ? $('div.flag:not(.world)').first().attr('class').split(/\s+/)[1].toUpperCase() : null
             }
         },
-        birthday: $('span[itemprop="birthDate"]').text(),
-        age: _calculateAge(Date.parse($('span[itemprop="birthDate"]').text()))
+        birthday: $('span[itemprop="birthDate"]').length > 0 ? $('span[itemprop="birthDate"]').text() : null,
+        age: $('span[itemprop="birthDate"]').length > 0 ? _calculateAge(Date.parse($('span[itemprop="birthDate"]').text())) : null
     };
 }
 
