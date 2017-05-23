@@ -16,6 +16,11 @@ function extractInfo(data) {
             world: {
                 rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[0]),
                 total: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[1])
+            },
+            local: {
+                rank: parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[0]),
+                total: parseInt($('div.flag:not(.world) + div > a').text().trim().split(',').join('').split(' / ')[1]),
+                country_code: $('div.flag:not(.world)').first()[0].className.split(/\s+/)[1].toUpperCase()
             }
         }
     };
