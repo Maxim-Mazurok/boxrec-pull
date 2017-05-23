@@ -8,12 +8,15 @@ function extractInfo(data) {
         name: $('.boxerTitle').first().text().trim(),
         nickname: $('span[itemprop="alternateName"]').text(),
         record: {
-            w: $('.bgwonBlock').first().text(),
-            l: $('.bglostBlock').first().text(),
-            d: $('.bgdrawBlock').first().text()
+            w: parseInt($('.bgwonBlock').first().text()),
+            l: parseInt($('.bglostBlock').first().text()),
+            d: parseInt($('.bgdrawBlock').first().text())
         },
         ranking: {
-            world: $('div.flag.world[title="World"] + div > a').text().trim()
+            world: {
+                rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join().split(' / ')[0]),
+                total: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join().split(' / ')[1])
+            }
         }
     };
 }
