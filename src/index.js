@@ -14,8 +14,8 @@ function extractInfo(data) {
         },
         ranking: {
             world: {
-                rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join().split(' / ')[0]),
-                total: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join().split(' / ')[1])
+                rank: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[0]),
+                total: parseInt($('div.flag.world[title="World"] + div > a').text().trim().split(',').join('').split(' / ')[1])
             }
         }
     };
