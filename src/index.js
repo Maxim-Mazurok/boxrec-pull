@@ -3,7 +3,7 @@ var cheerio = require('cheerio');
 
 // https://stackoverflow.com/a/21984136/4536543
 function _calculateAge(birthday) {
-    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDifMs = Date.now() - birthday;
     var ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
