@@ -12,7 +12,6 @@ Also, my fork gets more data to make fair comparison:
 - ranking (world and local)
 - birthday
 - age
-- ... more coming soon
 
 ## Installation
 ```sh
